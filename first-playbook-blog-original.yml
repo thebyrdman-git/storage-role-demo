@@ -1,0 +1,18 @@
+- hosts: rhel8-server3
+  vars:
+    storage_pools:
+      - name: database_vg
+        disks: 
+          - vdd
+          - vdf
+        volumes:
+          - name: database_lv
+            size: 50%
+            mount_point: "/database"
+            state: present
+          - name: backup_lv
+            size: 20%
+            mount_point: "/backup"
+            state: present
+  roles:
+    - redhat.rhel_system_roles.storage
